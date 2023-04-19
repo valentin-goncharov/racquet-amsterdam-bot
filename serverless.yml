@@ -1,0 +1,16 @@
+service: racquet-amsterdam-bot
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: prod
+  region: eu-central-1
+
+functions:
+  webhook:
+    handler: bot.webhookHandler
+    events:
+      - http:
+          path: /bot/webhook
+          method: post
+          cors: true
