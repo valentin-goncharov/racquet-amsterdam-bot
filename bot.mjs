@@ -13,13 +13,12 @@ import fetch from 'node-fetch';
 import FetchCookie from 'fetch-cookie';
 
 
-if (process.env.NODE_ENV === "DEV") {
-    dotenv.config();
-}
+
+dotenv.config();
 
 const fetchWithCookies = FetchCookie(fetch);
 
-const token = process.env.RACQUET_AMSTERDAM_BOT_TOKEN;
+const token = process.env.TELEGRAM_BOT_API_TOKEN;
 
 const dateFormats = [
     'yyyy-MM-dd',
