@@ -1,0 +1,33 @@
+{
+  "locations": {
+    "squash": [
+      "SquashCity",
+      "Amstelpark"
+    ],
+    "tennis": [
+      "Amstelpark"
+    ],
+    "padel": [
+      "Amstelpark"
+    ]
+  },
+  "squashcity": {
+    "id": "squashcity",
+    "name": "SquashCity",
+    "address": "Ketelmakerstraat 6, 1013 DE Amsterdam",
+    "website": "www.squashcity.com",
+    "bookingLink": "https://squashcity.baanreserveren.nl/",
+    "baseUrl": "https://squashcity.baanreserveren.nl",
+    "squash": [15]
+  },
+  "amstelpark": {
+    "id": "amstelpark",
+    "name": "Amstelpark",
+    "address": "Koenenkade 8, 1081 KH Amsterdam",
+    "website": "www.amstelpark.nl",
+    "bookingLink": "https://amstelpark.baanreserveren.nl/",
+    "baseUrl": "https://amstelpark.baanreserveren.nl",
+    "squash":  [878],
+    "tennis": [851, 879]
+  }
+}
