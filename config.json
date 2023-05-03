@@ -1,16 +1,16 @@
 {
   "locations": {
     "squash": [
-      "SquashCity",
-      "Amstelpark",
-      "FransOtten"
+      "squashcity",
+      "amstelpark",
+      "fransotten"
     ],
     "tennis": [
-      "Amstelpark",
-      "FransOtten"
+      "amstelpark",
+      "fransotten"
     ],
     "padel": [
-      "Amstelpark"
+      "amstelpark"
     ]
   },
   "squashcity": {

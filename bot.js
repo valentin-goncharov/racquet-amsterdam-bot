@@ -57,15 +57,14 @@ async function handleCommand(command) {
     let message;
     console.log(`received command ${command.text}`);
     if (command.argsString === `locations`) {
-        message = `Available ${command.command} locations:\n${locations.map(location => {
-            const locationId = location.toLowerCase();
+        message = `Available ${command.command} locations:\n${locations.map(locationId => {
             return `${config[locationId].id} : ${locationString(locationId)}`
         }).join('\n')}`;
     } else {
         const args = command.args;
         if (args && args.location) {
-            const place = args.location
-            const locationId = place.toLowerCase()
+            const location = args.location
+            const locationId = location.toLowerCase()
 
             const locationExists = locations.some((location) => location.toLowerCase() === locationId);
 
@@ -124,8 +123,8 @@ async function handleCommand(command) {
 
                 }
             } else {
-                message = `I'm sorry, but the provided location "${place}" is unknown to me.\nPlease use one of the known locations: \n${locations.map(locationId => {
-                    return `${config[locationId.toLowerCase()].id} : ${locationString(locationId.toLowerCase())}`
+                message = `I'm sorry, but the provided location "${location}" is unknown to me.\nPlease use one of the known locations: \n${locations.map(locationId => {
+                    return `${config[locationId].id} : ${locationString(locationId)}`
                 }).join('\n')}`;
             }
         } else {
