@@ -2,10 +2,12 @@
   "locations": {
     "squash": [
       "SquashCity",
-      "Amstelpark"
+      "Amstelpark",
+      "FransOtten"
     ],
     "tennis": [
-      "Amstelpark"
+      "Amstelpark",
+      "FransOtten"
     ],
     "padel": [
       "Amstelpark"
@@ -16,7 +18,6 @@
     "name": "SquashCity",
     "address": "Ketelmakerstraat 6, 1013 DE Amsterdam",
     "website": "www.squashcity.com",
-    "bookingLink": "https://squashcity.baanreserveren.nl/",
     "baseUrl": "https://squashcity.baanreserveren.nl",
     "squash": [15]
   },
@@ -25,9 +26,17 @@
     "name": "Amstelpark",
     "address": "Koenenkade 8, 1081 KH Amsterdam",
     "website": "www.amstelpark.nl",
-    "bookingLink": "https://amstelpark.baanreserveren.nl/",
     "baseUrl": "https://amstelpark.baanreserveren.nl",
     "squash":  [878],
     "tennis": [851, 879]
+  },
+  "fransotten": {
+    "id": "fransotten",
+    "name": "Frans Otten Stadion",
+    "address": "IJsbaanpad 43, 1076 CV Amsterdam",
+    "website": "www.fransottenstadion.nl",
+    "baseUrl": "https://fransotten.baanreserveren.nl",
+    "squash":  [516],
+    "tennis": [515]
   }
 }

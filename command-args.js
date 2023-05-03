@@ -21,7 +21,7 @@ const dateFormats = [
 const locales = [enUS, enGB, fr, nl, de, ru];
 
 function parseArgs(command) {
-    if (command === 'locations') {
+    if (!command || command === 'locations') {
         return {};
     }
     const args = commandRegex.exec(command);

@@ -15,14 +15,13 @@ const instances = new Map();
 
 //
 
-
 const helpMessage = `Hi I'm Racquet Amsterdam Bot!
 I can help you to find a free court.
 I understand commands:
  - /squash locations
- - /squash {location} {optional date}
+ - /squash {location} {optional date} {optional time}
  - /tennis locations
- - /tennis {location} {optional date}`;
+ - /tennis {location} {optional date} {optional time}`;
 
 //-BOT------------
 const bot = new Telegraf(TELEGRAM_BOT_API_TOKEN);
@@ -64,7 +63,7 @@ async function handleCommand(command) {
         }).join('\n')}`;
     } else {
         const args = command.args;
-        if (args) {
+        if (args && args.location) {
             const place = args.location
             const locationId = place.toLowerCase()
 
@@ -103,11 +102,22 @@ async function handleCommand(command) {
                     const formattedDate = format(date, "dd MMMM yyyy", {locale: enGB});
                     const formattedTime =  formatTime(args.timeCommand, begin, end);
                     if (freeSlots.length > 0) {
+                        let reducedCourtString = false;
                         message = `${config[locationId].name}: ${locationString(locationId)}\nAvailable slots on ${formattedDate} ${formattedTime}\n`;
                         message = message + freeSlots.map((slot, index) => {
-                            const markdown = index % 2 !== 0 ? '*' : '_'
-                            return `${markdown}${slot.name}: ${slot.timeSlots.join(', ')}${markdown}`
+                            const markdown = index % 2 !== 0 ? '*' : '_';
+                            let slotsString;
+                            if (slot.timeSlots.length < 31) {
+                                slotsString = slot.timeSlots.join(', ');
+                            } else {
+                                reducedCourtString = true;
+                                slotsString = `${slot.timeSlots.slice(0, 8).join(', ')} ... ${slot.timeSlots.pop()}`;
+                            }
+                            return `${markdown}${slot.name}: ${slotsString}${markdown}`;
                         }).join('\n');
+                        if (reducedCourtString) {
+                            message = `${message}\n\n\`Notice\\! Some time slots are not displayed due to too many time slots, please specify the time if you want to see the available time slots.\``;
+                        }
                     } else {
                         message = `${config[locationId].name}: ${locationString(locationId)}\nI'm sorry but there are no free slots left on ${formattedDate} ${formattedTime}`;
                     }
@@ -119,7 +129,7 @@ async function handleCommand(command) {
                 }).join('\n')}`;
             }
         } else {
-            message = `Please use the command in the format "/${command} \\{place\\} \\{date\\}" or "/${command} locations"`;
+            message = emptyMessageString(command.command);
         }
     }
 
@@ -129,6 +139,16 @@ async function handleCommand(command) {
 function locationString(locationId) {
     const location = config[locationId]
     return `${location.address} [${location.website}](${location.website})`
+}
+
+function emptyMessageString(command) {
+    return `Please use the command in the one of available formats: 
+ \\- /${command} locations
+ \\- /${command} \\{location\\} \\{date\\}
+ \\- /${command} \\{location\\} \\{date\\} before \\{time\\}
+ \\- /${command} \\{location\\} \\{date\\} after \\{time\\}
+ \\- /${command} \\{location\\} \\{date\\} between \\{start time\\} and \\{end time\\}
+ \\- /${command} \\{location\\} \\{date\\} from \\{start time\\} to \\{end time\\}`;
 }
 
 function escapeMessage(message) {
