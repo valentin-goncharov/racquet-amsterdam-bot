@@ -1,0 +1,25 @@
+service: racquet-amsterdam-bot
+
+plugins:
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-central-1
+  memorySize: 128
+  timeout: 10
+  environment:
+    TELEGRAM_BOT_API_TOKEN: ${env:TELEGRAM_BOT_API_TOKEN}
+    SQUASH_BOT_LOGIN: ${env:SQUASH_BOT_LOGIN}
+    SQUASH_BOT_PASSWORD: ${env:SQUASH_BOT_PASSWORD}
+
+functions:
+  bot:
+    handler: bot.aws.handler
+    events:
+      - http:
+          path: /
+          method: post
+
+useDotenv: true

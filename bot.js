@@ -334,5 +334,6 @@ function parseTable(table) {
 }
 
 module.exports = {
-    bot
-}
+    bot,
+    webhookCallback: bot.webhookCallback.bind(bot)
+};
